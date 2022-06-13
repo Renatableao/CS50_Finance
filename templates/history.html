@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    History
+{% endblock %}
+
+{% block main %}
+    <form action="/history">
+    <div class= "container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col" class = "text-start">Symbol</th>
+                    <th scope="col" class = "text-end">Shares</th>
+                    <th scope="col" class = "text-end">Price</th>
+                    <th scope="col" class= "text-end">Transacted</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for row in transactions %}
+                <tr>
+                    <td class = "text-start">{{ row["symbol"] }}</td>
+                    <td class = "text-end">{{ row["shares"] }}</td>
+                    <td class = "text-end">{{ row["price"] | usd }}</td>
+                    <td class = "text-end">{{ row["datetime"] }}</td>
+                </tr>
+             {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    </form>
+{% endblock %}

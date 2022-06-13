@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Portfolio
+{% endblock %}
+
+{% block main %}
+    <form action="/">
+    <div class= "container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col" class = "text-start">Symbol</th>
+                    <th scope="col" class = "text-start">Name</th>
+                    <th scope="col" class = "text-end">Shares</th>
+                    <th scope="col" class = "text-end">Price</th>
+                    <th scope="col" class = "text-end">TOTAL</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for dict in portfolio %}
+                <tr>
+                    <td class = "text-start">{{ dict["symbol"] }}</td>
+                    <td class = "text-start">{{ dict["name"] }}</td>
+                    <td class = "text-end">{{ dict["shares"] }}</td>
+                    <td class = "text-end">{{ dict["price"] | usd }}</td>
+                    <td class = "text-end">{{ dict["total"] | usd }}</td>
+                </tr>
+             {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td class= "border-0 fw-bold text-end" colspan="4">Cash</td>
+                    <td class= "border-0 text-end"> {{ cash[0]["cash"] | usd }}</td>
+                <tr>
+                <tr>
+                    <td class= "border-0 fw-bold text-end" colspan="4">TOTAL</td>
+                    <td class= "border-0 text-end">{{ (total + cash[0]["cash"]) | usd }}</td>
+                <tr>
+            </tfoot>
+        </table>
+    </div>
+    </form>
+{% endblock %}
